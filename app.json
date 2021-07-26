@@ -19,11 +19,19 @@
     "ios": {
       "supportsTablet": true
     },
+    "androidNavigationBar":{
+      "barStyle":"light-content",
+      "backgroundColor":"#00ffbb00"
+    },
     "android": {
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.srriuz.threelow"
     },
     "web": {
       "favicon": "./assets/favicon.png"
