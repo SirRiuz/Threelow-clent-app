@@ -24,7 +24,7 @@ export default class ThreadContainer extends React.Component {
 
 
     if(this.state.isVisible){
-      modal = <ModalOptions 
+      modal = <ModalOptions
         text={this.props.data.text} 
         size={this.props.data.subThreadsSize} 
         id={this.props.data.id} 

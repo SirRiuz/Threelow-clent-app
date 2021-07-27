@@ -1,7 +1,8 @@
 
 
-import { StyleSheet,TextInput,Text,View,Pressable } from 'react-native';
+import { StyleSheet,Text,View,Pressable } from 'react-native';
 import React from 'react';
+import AdFile from '../assets/svg/adFile'
 
 
 export default class BottomCreate extends React.Component{
@@ -28,9 +29,9 @@ export default class BottomCreate extends React.Component{
           style={{ flex:1,flexDirection:'row' }}
           onPress={this.onCreateSubThread}
         >
-          <Text style={styles.file}>Files</Text>
-          <View style={styles.text}>
-            <Text style={{ color:'rgba(0,0,0,0.5)' }}>Responde este hilo</Text>
+          <View style={styles.boxContainer}>
+            <AdFile/>
+            <Text style={{ color:'rgba(0,0,0,0.5)',marginLeft:15 }}>Añadir comentario</Text>
           </View>
 
         </Pressable>
@@ -48,18 +49,18 @@ const styles = StyleSheet.create({
   send:{
     backgroundColor:'green',
   },
-  text:{
-    justifyContent:'center',
-    width:'90%',
+  boxContainer:{
+    alignItems:'center',
+    alignContent:'center',
+    flexDirection:'row',
+    width:'100%',
     paddingLeft:10,
     paddingRight:10,
     height:'70%',
     opacity:0.9,
-    backgroundColor:'rgba(0,0,0,0.04)',
+    backgroundColor:'#F1F2F6',
     height:45,
-    borderRadius:10,
-    borderColor:'rgba(0,0,0,0.07)',
-    borderWidth:1,
+    borderRadius:100
   },
   container:{
     bottom:0,

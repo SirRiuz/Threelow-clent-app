@@ -5,11 +5,11 @@ import { StyleSheet, Text, View,Pressable } from 'react-native';
 import Trends from '../assets/svg/trends'
 import Time from '../assets/svg/time'
 import TimeLine from '../components/Timeline'
-import CreateThreadScreen from '../screens/createThread'
+//import CreateThreadScreen from '../screens/createThread'
 import settings from '../config'
 import FeedThrends from './feedThrends'
 import Add from '../assets/svg/add'
-import * as Animatable from 'react-native-animatable';
+//import * as Animatable from 'react-native-animatable';
 import AppBar from '../components/appbar/appBar'
 import DrawerMenu from '../screens/drawerMenu'
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -18,8 +18,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 function news(props){
   return(
-    <View style={{ flex:1 }}>
-      <AppBar title='New'></AppBar>
+    <View style={{ flex:1,backgroundColor:'#F7F8FA' }}>
+      <AppBar navigation={props.navigation} title='New'></AppBar>
 
       <View style={{ flex:1,marginTop:80 }}>
         <TimeLine
@@ -37,12 +37,9 @@ function news(props){
 function Indicator(props){
   if(props.focus){
     return(
-      <View style={styles.indicator}>
-      </View>
+      <View style={styles.indicator}></View>
     )
-  } else {
-    return null
-  }
+  } else { return null }
 }
 
 
@@ -82,12 +79,10 @@ class HomeScreen extends React.Component {
           options={{
             tabBarIcon:({focused}) => {
               return(
-                <Animatable.View ref={this.state.homeRef}>
-                  <View style={styles.tabItem}>
-                    <Trends focus={focused}/>
-                    <Indicator focus={focused} />
-                  </View>
-                </Animatable.View>
+                <View style={styles.tabItem}>
+                  <Trends focus={focused}/>
+                  <Indicator focus={focused} />
+                </View>
               )
             }
           }}
@@ -119,12 +114,10 @@ class HomeScreen extends React.Component {
           options={{
             tabBarIcon:({focused}) => {
               return (
-                <Animatable.View ref={this.refHome}>
-                  <View style={styles.tabItem}>
-                    <Time focus={focused}/>
-                    <Indicator focus={focused}/>
-                  </View>
-                </Animatable.View>
+                <View style={styles.tabItem}>
+                  <Time focus={focused}/>
+                  <Indicator focus={focused}/>
+              </View>
               )
             }
           }}

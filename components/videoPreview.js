@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { View,Text,StyleSheet,Pressable } from "react-native";
-import config from '../config'
+import { View,StyleSheet,Pressable } from "react-native";
 import { Video } from 'expo-av';
 
 
@@ -38,6 +37,8 @@ export default class VideoPreview extends React.Component {
           volume={0}
           source={{ uri:this.props.data.url }}
         />
+
+
       </Pressable>
     )
   }

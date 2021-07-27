@@ -26,11 +26,11 @@ export default class CreateThreadScreen extends React.Component {
       var resultFiles = await ImagePicker.launchImageLibraryAsync({
         mediaTypes:ImagePicker.MediaTypeOptions.All,
       })
-      this.setState({
-         media:this.state.media.concat(
-            resultFiles
-         )
-      })
+      if(!resultFiles.cancelled){
+        this.setState({
+          media:this.state.media.concat(resultFiles)
+       })
+      }
     } else{
         alert('Acceso denegado')
     }

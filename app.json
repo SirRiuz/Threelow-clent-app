@@ -20,8 +20,8 @@
       "supportsTablet": true
     },
     "androidNavigationBar":{
-      "barStyle":"light-content",
-      "backgroundColor":"#00ffbb00"
+      "barStyle":"dark-content",
+      "backgroundColor":"#F7F8FA"
     },
     "android": {
       "config": {

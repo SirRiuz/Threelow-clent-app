@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet,Pressable } from 'react-native';
 import BackIcon from '../../assets/svg/back'
 
 
@@ -15,7 +15,14 @@ export default class TagHeader extends React.Component{
       <View style={styles.container}>
 
         <View>
-          <BackIcon color={'#000'}/>
+          <Pressable
+            onPress={() => {
+              this.props.navigation.goBack()
+            }}
+          >
+            <BackIcon color={'#000'}/>
+          </Pressable>
+
         </View>
         <View style={{ width:250 }}>
             <Text style={styles.tahNameStyle}><Text style={styles.tagStyle}>#</Text>{this.props.tag}</Text>
