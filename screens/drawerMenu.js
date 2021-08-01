@@ -4,39 +4,45 @@ import React from 'react';
 import { Text,View,Pressable,StyleSheet, } from 'react-native';
 
 
-class DrawerMenu extends React.Component{
-  render(){
+class DrawerMenu extends React.Component {
 
+  constructor(props){
+    super(props)
+  }
+  
+
+  render(){
     var renderItems = null
     const listItems = [{
-        title:'Configuraciones',
-        page:'settings',
-        icon:'config'
+        title:'Mis actividad',
+        page:'MyThreads',
+        icon:''
       },{
         title:'Guardado',
-        page:'settings',
-        icon:'config'
-      },{
-        title:'Temas',
-        page:'settings',
-        icon:'config'
-      },{
-        title:'Atuda',
-        page:'settings',
-        icon:'config'
-      },{
-        title:'Reglas',
-        page:'settings',
-        icon:'config'
-      },{
-        title:'Novedades',
-        page:'settings',
+        page:'SaveThread',
         icon:'config'
       }
     ]
 
-    renderItems = listItems.map((i,x) => {return (null)})
-    return(<View style={styles.container}></View>)
+    renderItems = listItems.map((i,x) =>(
+      <Pressable
+        style={{ backgroundColor:'red' }}
+        key={x}
+        onPress={() => {
+          this.props.navigation.navigate(i.page)
+        }}
+      >
+        <View>
+          <Text>{i.title}</Text>
+        </View>
+      </Pressable>
+    ))
+
+    return(
+      <View style={styles.container}>
+        {renderItems}
+      </View>
+    )
   }
 }
 

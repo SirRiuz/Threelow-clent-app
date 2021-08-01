@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { View,Text,StyleSheet,StatusBar,ToastAndroid,Clipboard } from "react-native";
+import { View,Text,StyleSheet,StatusBar,ToastAndroid,Clipboard,AsyncStorage } from "react-native";
 import Modal from 'react-native-modal'
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 //import CopyLink from '../assets/svg/copyLink'
@@ -10,6 +10,7 @@ import config from '../config'
 import CopyIcon from '../assets/svg/copyText'
 import DeleteIcon from '../assets/svg/delete'
 //import SaveThread from '../assets/svg/saveThread'
+
 
 
 export default class ModalOptions extends React.Component {
@@ -23,6 +24,22 @@ export default class ModalOptions extends React.Component {
 
   componentDidMount(){
     this.onGetData()
+  }
+
+
+  onSaveThread = async () => {
+    try{
+      if(await AsyncStorage.getItem('thrads') == null){
+        await AsyncStorage.setItem('thrads',this.props.id)
+      } else {
+        var threadData = await (await AsyncStorage.getItem('thrads')).concat(`:${this.props.id}`)
+        await AsyncStorage.setItem('thrads',threadData)
+      }
+      alert(await AsyncStorage.getItem('thrads'))
+      this.props.onBack()
+    } catch (e){
+      alert('Error..')
+    }
   }
 
 
@@ -111,6 +128,11 @@ export default class ModalOptions extends React.Component {
             subTitle:'Me preocupa este hilo',
             action:this.onReport,
             icon:<ReportThread/>
+        },{
+          title:'Guardar',
+          subTitle:null,
+          action:this.onSaveThread,
+          icon:null
         }
     ]
 

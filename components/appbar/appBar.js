@@ -24,7 +24,13 @@ export default class AppBar extends React.Component{
           <Text style={styles.title}>{this.props.title}</Text>
         </View>
 
-        <SearchIcon/>
+        <Pressable
+          onPress={() => {
+            this.props.navigation.navigate('Search')
+          }}
+        >
+          <SearchIcon/>
+        </Pressable>
       </View>
     )
   }

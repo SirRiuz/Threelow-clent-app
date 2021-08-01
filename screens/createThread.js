@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View,StyleSheet,TextInput,TouchableNativeFeedback,ScrollView } from 'react-native';
+import { View,StyleSheet,TextInput,TouchableNativeFeedback,ScrollView,AsyncStorage } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import ImagePreview from '../components/createThread/imagePreview'
 import Media from '../assets/svg/uploadMedia'
@@ -17,8 +17,6 @@ export default class CreateThreadScreen extends React.Component {
       text:''
     }
   }
-
-
 
   requestFiles = async () => {
     const result = await ImagePicker.requestMediaLibraryPermissionsAsync()

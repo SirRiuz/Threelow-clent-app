@@ -134,12 +134,12 @@ class HomeScreen extends React.Component {
 
 const Drawer = createDrawerNavigator();
 
-export default function Home(){
+export default function Home(props){
   return(
     <Drawer.Navigator
       drawerType={'slide'}
       overlayColor={'rgba(0,0,0,0)'}
-      drawerContent={() => <DrawerMenu/>}
+      drawerContent={() => <DrawerMenu navigation={props.navigation}/>}
       drawerStyle={{
         backgroundColor:'#fff',
         position:'absolute',

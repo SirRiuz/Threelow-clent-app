@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Text, View,StyleSheet,Pressable, StatusBar, } from 'react-native';
+import { Text, View,StyleSheet,Pressable,StatusBar,AsyncStorage } from 'react-native';
 import Close from '../../assets/svg/close'
 import config from '../../config.js'
 import Modal from 'react-native-modal'
@@ -16,6 +16,19 @@ class AppBarCreateThread extends React.Component {
     this.state = {
       isLoad:false,
       isVisibleSnak:false
+    }
+  }
+
+  onSaveThread = async (id) => {
+    try{
+      if(await AsyncStorage.getItem('myThread') == null){
+        await AsyncStorage.setItem('myThread',id)
+      } else {
+        var threadData = await (await AsyncStorage.getItem('myThread')).concat(`:${id}`)
+        await AsyncStorage.setItem('myThread',threadData)
+      }
+    } catch (e){
+      alert('Error..')
     }
   }
 
@@ -56,6 +69,8 @@ class AppBarCreateThread extends React.Component {
         if(res.status != 'ok') {
           alert('Error al crear el hilo')
         } else {
+          //console.log(res.data.id)
+          this.onSaveThread(res.data.id)
           this.props.navigation.goBack()
         }
       })
