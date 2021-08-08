@@ -23,9 +23,9 @@ export default class ViewThread extends React.Component {
     var opThreadData = null
     var statusBar = <StatusBar barStyle={'dark-content'}/>
 
-
     if(this.props.route.params.header != undefined){
       opThreadData = {
+        nativeLenguaje:this.props.route.params.header.nativeLenguaje,
         reactionsPreview:this.props.route.params.header.reactionsPreview,
         text:this.props.route.params.header.text,
         type:'header',
@@ -52,6 +52,7 @@ export default class ViewThread extends React.Component {
           headerData={opThreadData}
           threadOpData={(data) => {
             console.log('NEW DATA')
+            console.log(data)
             this.setState({
               files:data.media_files,
               media_files_length:data.media_files.length

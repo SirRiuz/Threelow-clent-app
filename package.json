@@ -21,6 +21,7 @@
     "expo-ads-admob": "~10.0.4",
     "expo-av": "~9.1.2",
     "expo-image-picker": "~10.1.4",
+    "expo-localization": "~10.1.0",
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -39,7 +40,7 @@
     "react-native-svg": "12.1.0",
     "react-native-web": "^0.17.1",
     "recyclerlistview": "^3.0.5",
-    "expo-localization": "~10.1.0"
+    "translate-google-api": "^1.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

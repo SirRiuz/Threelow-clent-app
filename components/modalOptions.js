@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { View,Text,StyleSheet,StatusBar,ToastAndroid,Clipboard,AsyncStorage } from "react-native";
+import { View,Text,StyleSheet,StatusBar,ToastAndroid,Clipboard,AsyncStorage,Alert } from "react-native";
 import Modal from 'react-native-modal'
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 //import CopyLink from '../assets/svg/copyLink'
@@ -35,7 +35,6 @@ export default class ModalOptions extends React.Component {
         var threadData = await (await AsyncStorage.getItem('thrads')).concat(`:${this.props.id}`)
         await AsyncStorage.setItem('thrads',threadData)
       }
-      alert(await AsyncStorage.getItem('thrads'))
       this.props.onBack()
     } catch (e){
       alert('Error..')
@@ -74,7 +73,7 @@ export default class ModalOptions extends React.Component {
 
   onThreadInfo = () => {
     this.props.onBack()
-    alert('INFO ...')
+    this.props.navigation.navigate('ThreadInfo')
   }
 
 

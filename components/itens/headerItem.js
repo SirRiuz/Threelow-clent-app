@@ -5,6 +5,7 @@ import { Text,View,StyleSheet } from 'react-native';
 import ReactionContainer from '../reactionContainer'
 import Flag from 'react-native-flags';
 import TextView from '../textView'
+import Translator from '../translator'
 
 
 export default class HeaderItem extends React.Component {
@@ -14,6 +15,13 @@ export default class HeaderItem extends React.Component {
     super(props)
   }
 
+  // translateP = async () => {
+  //   const result = await W(this.props.data.text, {
+  //     to: "en",
+  //   });
+  //   alert(result)
+  // }
+
   render(){
     return(
       <View style={styles.container}>
@@ -22,7 +30,12 @@ export default class HeaderItem extends React.Component {
           style={styles.text}>
             {this.props.data.text}
         </TextView>
-        
+        <Translator
+          nativeLenguaje={this.props.data.nativeLenguaje}
+          navigation={this.props.navigation}
+          text={this.props.data.text}
+        />
+
         <Text style={styles.dateTimeText}>12:48 p.m · 16 may. 2021</Text>
         <View style={styles.metaInfo}>
           <ReactionContainer data={this.props.data} />

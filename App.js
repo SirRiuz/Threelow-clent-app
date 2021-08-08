@@ -12,6 +12,7 @@ import ReportScreen from './screens/report'
 import SearchScreen from './screens/search'
 import SaveThread from './screens/saveThread'
 import MyThreads from './screens/myThreads'
+import ThreadInfo from './screens/threadInfo'
 
 
 function RootStackScreens(){
@@ -42,6 +43,7 @@ class App extends React.Component {
 
           <RootStack.Screen name="Main" component={RootStackScreens} />
           <RootStack.Screen name='create' component={CreateThreadScreen} />
+          <RootStack.Screen name='ThreadInfo' component={ThreadInfo} />
           <RootStack.Screen name='FilePreview' component={FilePreview} />
           <RootStack.Screen options={{ animationEnabled:false }} name='Report' component={ReportScreen} />
           

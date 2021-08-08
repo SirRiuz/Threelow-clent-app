@@ -107,7 +107,6 @@ class TimeLine extends React.Component {
 
 
   onRenderRow = (_,data) => {
-
     if(data.type == 'ads'){
       return <AdsBanner/>
     }

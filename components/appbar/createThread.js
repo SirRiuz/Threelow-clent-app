@@ -8,11 +8,11 @@ import { BarIndicator } from 'react-native-indicators'
 import * as Localization from 'expo-localization';
 
 
-
 class AppBarCreateThread extends React.Component {
 
   constructor(props){
     super(props)
+    this.captchapRef = React.createRef()
     this.state = {
       isLoad:false,
       isVisibleSnak:false
@@ -35,11 +35,14 @@ class AppBarCreateThread extends React.Component {
   onCreateThread = (url) => {
     this.setState({
       isLoad:true
-  })
+    })
 
     var data = new FormData()
+    const syslemLenguaje = Localization.locale.split('-')[0]
+
     data.append('text',this.props.data.text)
     data.append('countryCode',Localization.region)
+    data.append('nativeLenguaje',syslemLenguaje)
 
     for(var x=0; x< this.props.data.media.length; x++){
       var formatFile = this.props.data.media[x].uri.split('.')
@@ -86,6 +89,11 @@ class AppBarCreateThread extends React.Component {
   }
 
 
+  onCreateThreadTest = () => {
+    this.captchapRef.current.open()
+  }
+
+
 
   render(){
     var pathIdUrl = ''
@@ -114,6 +122,7 @@ class AppBarCreateThread extends React.Component {
             onPress={() => {
               var url = `${config.apiUrl}/api/v1/thread/${pathIdUrl}`
               this.onCreateThread(url)
+              //this.onCreateThreadTest()
             }}
           >
             <Text style={{ color:'#fff',fontWeight:'bold' }}>Create</Text>
@@ -131,7 +140,6 @@ class AppBarCreateThread extends React.Component {
             <BarIndicator color='#d4d4d4'/>
           </View>
         </Modal>
-
       </View>
     )
   }
