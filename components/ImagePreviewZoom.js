@@ -41,7 +41,7 @@ export default class ImagePreviewZoom extends React.Component {
             cropWidth={Dimensions.get('window').width}
             cropHeight={Dimensions.get('window').height}
             imageWidth={400}
-            imageHeight={520}
+            imageHeight={Dimensions.get('window').height}
           >
             <Image
               style={{ flex:1 }}

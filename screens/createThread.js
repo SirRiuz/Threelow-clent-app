@@ -6,6 +6,10 @@ import * as ImagePicker from 'expo-image-picker';
 import ImagePreview from '../components/createThread/imagePreview'
 import Media from '../assets/svg/uploadMedia'
 import AppBarCreateThread from '../components/appbar/createThread'
+import * as Font from 'expo-font';
+import { UIActivityIndicator } from 'react-native-indicators';
+
+
 
 
 export default class CreateThreadScreen extends React.Component {
@@ -14,9 +18,23 @@ export default class CreateThreadScreen extends React.Component {
     super(props)
     this.state = {
       media:[],
-      text:''
+      text:'',
+      isLoadFont:false
     }
   }
+
+  async loadFont () {
+    await Font.loadAsync({
+      'Cerebri-Sans-Book':require('../assets/fonts/Cerebri-Sans-Book.ttf')
+    })
+    this.setState({isLoadFont:true})
+  }
+
+
+  componentDidMount() {
+    this.loadFont()
+  }
+
 
   requestFiles = async () => {
     const result = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -28,6 +46,7 @@ export default class CreateThreadScreen extends React.Component {
         this.setState({
           media:this.state.media.concat(resultFiles)
        })
+       console.log(media)
       }
     } else{
         alert('Acceso denegado')
@@ -70,6 +89,10 @@ export default class CreateThreadScreen extends React.Component {
       }
     }
 
+    if(!this.state.isLoadFont) {
+      return <UIActivityIndicator color='#c2c2c2'/>
+    }
+
     return(
       <View style={styles.container}>
         <AppBarCreateThread
@@ -80,7 +103,13 @@ export default class CreateThreadScreen extends React.Component {
         <StatusBar translucent={true}/>
         <TextInput
           onChange={this.onChange}
-          style={styles.textInput}
+          style={{
+            fontSize:19.5,
+            padding:20,
+            marginTop:10,
+            marginBottom:20,
+            fontFamily:'Cerebri-Sans-Book'
+          }}
           maxLength={400}
           multiline={true}
           autoFocus={true}
@@ -125,12 +154,6 @@ const styles = StyleSheet.create({
     height:65,
     justifyContent:'center',
     paddingLeft:20
-  },
-  textInput:{
-    fontSize:19.5,
-    padding:20,
-    marginTop:10,
-    marginBottom:20
   },
   container:{
     flex:1,

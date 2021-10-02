@@ -6,13 +6,30 @@ import Flag from 'react-native-flags';
 //import MediaPreviewViewPort from '../mediaPreview'   ELIMINAR
 import TextView from '../textView'
 import ContentPreview from '../contentPreview'
+import * as Font from 'expo-font';
+
 
 
 export default class ThreadItem extends React.Component {
 
   constructor(props){
     super(props)
+    this.state = {
+      isLoadFont:false
+    }
   }
+
+  async loadFont () {
+    await Font.loadAsync({
+      'Cerebri-Sans-Book':require('../../assets/fonts/Cerebri-Sans-Book.ttf')
+    })
+    this.setState({isLoadFont:true})
+  }
+
+  componentDidMount() {
+    this.loadFont()
+  }
+
 
   render(){
     var separator = null
@@ -33,10 +50,22 @@ export default class ThreadItem extends React.Component {
     if(this.props.sub){
       separator = <View style={styles.separator}></View>
     }
+
+    if(!this.state.isLoadFont) {
+      return null
+    }
+
+    
     return(
       <View style={styles.container}>
         {separator}
-        <TextView style={styles.text} navigation={this.props.navigation}>{this.props.text}</TextView>
+        <TextView style={{
+          fontFamily:'Cerebri-Sans-Book',
+          fontSize:15.5,
+          color:'rgba(33, 33, 33,0.89)',
+          fontSize:15.5,
+          marginBottom:3.5,
+        }} navigation={this.props.navigation}>{this.props.text}</TextView>
         {fileData}
         <View style={styles.dateContainer}>
           <ReactionContainer data={this.props.reactions}/>
@@ -62,9 +91,8 @@ const styles = StyleSheet.create({
       justifyContent:'space-between'
     },
     text:{
-      marginBottom:3.5,
-      fontSize:15.5,
-      color:'rgba(33, 33, 33,0.88)'
+      
+      
     },
     container:{
       flex:1,

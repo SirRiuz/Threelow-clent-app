@@ -19,6 +19,7 @@ export default class MediaPreviewHeader extends React.Component{
       console.log('\n\n\nMEDIA DATA')
       var swipeItemData = this.props.data.media_file.map((i,k) => {
         var url = i.url
+        console.log(url)
         if(i.isVideo){
           return({
             type:'video',
@@ -44,6 +45,7 @@ export default class MediaPreviewHeader extends React.Component{
         )
       }
     }
+
     
     return(
       <View style={styles.container}>

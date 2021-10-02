@@ -10,6 +10,10 @@ import config from '../config'
 import CopyIcon from '../assets/svg/copyText'
 import DeleteIcon from '../assets/svg/delete'
 //import SaveThread from '../assets/svg/saveThread'
+import * as Font from 'expo-font';
+import SaveThread from '../assets/svg/saveThread'
+import { UIActivityIndicator } from 'react-native-indicators';
+
 
 
 
@@ -18,11 +22,20 @@ export default class ModalOptions extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      showDelete:false
+      showDelete:false,
+      isLoad:true,
     }
   }
 
+  async loadFont () {
+    await Font.loadAsync({
+      'Cerebri-Sans-Book':require('../assets/fonts/Cerebri-Sans-Book.ttf')
+    })
+    this.setState({isLoadFont:true})
+  }
+
   componentDidMount(){
+    this.loadFont()
     this.onGetData()
   }
 
@@ -84,7 +97,8 @@ export default class ModalOptions extends React.Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          showDelete:res.result
+          showDelete:res.result,
+          isLoad:false
         })
       })
 
@@ -109,36 +123,49 @@ export default class ModalOptions extends React.Component {
   }
 
 
+  /*
+   Disponible en proximas actualizaciones ...
+  ,{
+            title:'Mas informacion',
+            subTitle:'Muestra informacion detallada',
+            action:this.onThreadInfo,
+            icon:<InfoThread/>
+        },
+  */
+
+
   render(){
     var listOptions = null
     var text = null
+    var textResponse
+    var content = null
     var options = [{
             title:'Copiar texto',
             subTitle:null,
             action:this.onCopyText,
             icon:<CopyIcon/>
         },{
-            title:'Mas informacion',
-            subTitle:'Muestra informacion detallada',
-            action:this.onThreadInfo,
-            icon:<InfoThread/>
-        },{
             title:'Reportar hilo',
             subTitle:'Me preocupa este hilo',
             action:this.onReport,
             icon:<ReportThread/>
-        },{
-          title:'Guardar',
-          subTitle:null,
-          action:this.onSaveThread,
-          icon:null
         }
     ]
+
+    if(this.props.isSave == undefined || this.props.isSave) {
+      options.push({
+        title:'Guardar',
+        subTitle:null,
+        action:this.onSaveThread,
+        icon:<SaveThread/>
+      })
+    }
+
 
     if(this.state.showDelete){
       options.push({
         title:'Eliminar',
-        subTitle:null,
+        subTitle:'Ya no me interesa este hilo',
         action:this.onDelete,
         icon:<DeleteIcon/>
       }) 
@@ -146,17 +173,31 @@ export default class ModalOptions extends React.Component {
 
 
     if(this.props.size >= 2){
-      text = `${this.props.size} Respuestas`
+      text = `${this.props.size} respuestas`
     } else {
-      text = `${this.props.size} Respuesta`
+      text = `${this.props.size} respuesta`
+    }
+
+
+    textResponse = <Text style={{
+      
+      color:'white',
+      fontWeight:'bold',
+      fontSize:14
+    }}>{text}</Text>
+    if(this.props.size == undefined){
+      textResponse = null
     }
 
     listOptions = options.map((i,x) => {
-
       var subTitle = null
 
       if(i.subTitle != null){
-        subTitle = <Text style={styles.textSubTitle}>{i.subTitle}</Text>
+        subTitle = <Text style={{
+          fontSize:13,
+          color:'rgba(0,0,0,0.63)',
+          fontFamily:'Cerebri-Sans-Book'
+        }}>{i.subTitle}</Text>
       }
       return(
         <Pressable
@@ -165,14 +206,38 @@ export default class ModalOptions extends React.Component {
         >
             <View key={x} style={styles.modalItem}>
               <View style={styles.iconContainer}>{i.icon}</View>
-              <View style={{ marginLeft:10 }}>
-                <Text style={styles.textTitle}>{i.title}</Text>
+              <View style={{ marginLeft:10,justifyContent:'center' }}>
+                <Text style={{
+                  fontSize:15.99,
+                  fontFamily:'Cerebri-Sans-Book',
+                  fontWeight:'900'
+                }}>{i.title}</Text>
                 {subTitle}
               </View>
             </View>
         </Pressable>
       )
     })
+
+    if(this.state.isLoad) {
+      content = <View style={styles.loadContainer}>
+        <UIActivityIndicator color='#d4d4d4'/>
+      </View>
+    } else {
+      content = (
+        <View style={styles.modalContainer}>
+          
+        <View style={styles.textContainer}>
+          {textResponse}
+        </View>
+
+        <View style={styles.optionsContainer}>
+          <View style={styles.separator}></View>
+          {listOptions}
+        </View>
+      </View>
+      )
+    }
 
     return(
       <Modal
@@ -186,17 +251,7 @@ export default class ModalOptions extends React.Component {
         style={styles.container}
       >
         <StatusBar backgroundColor={'rgba(0,0,0,0.4)'} />
-        <View style={styles.modalContainer}>
-          
-          <View style={styles.textContainer}>
-            <Text style={styles.textResponse}>{text}</Text>
-          </View>
-
-          <View style={styles.optionsContainer}>
-            <View style={styles.separator}></View>
-            {listOptions}
-          </View>
-        </View>
+        {content}
       </Modal>
     )
   }
@@ -206,6 +261,15 @@ export default class ModalOptions extends React.Component {
 
 
 const styles = StyleSheet.create({
+  loadContainer:{
+    position:'absolute',
+    width:'100%',
+    height:90,
+    backgroundColor:'#fff',
+    bottom:0,
+    borderTopStartRadius:15,
+    borderTopEndRadius:15,
+  },
   iconContainer:{
     borderRadius:100,
     justifyContent:'center',
@@ -213,11 +277,6 @@ const styles = StyleSheet.create({
     backgroundColor:'rgba(0,0,0,0.05)',
     width:40,
     height:40
-  },
-  textResponse:{
-    color:'white',
-    fontWeight:'bold',
-    fontSize:14
   },
   separator:{
     marginTop:15,
@@ -227,13 +286,6 @@ const styles = StyleSheet.create({
     opacity:0.15,
     marginBottom:25,
     borderRadius:100
-  },
-  textSubTitle:{
-    fontSize:13,
-    color:'rgba(0,0,0,0.63)'
-  },
-  textTitle:{
-    fontSize:17
   },
   modalItem:{
     flexDirection:'row',

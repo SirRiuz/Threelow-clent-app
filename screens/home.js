@@ -95,7 +95,10 @@ class HomeScreen extends React.Component {
           options={{
             tabBarIcon:({focused}) => (
               <View style={styles.createBtn}>
-                <Add/>
+                <Add
+                  color={'#000'}
+                  opacity={0.4}
+                />
               </View>
             )
           }}

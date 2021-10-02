@@ -16,7 +16,7 @@ function ReactionIconSvg(props) {
         cy={12}
         r={10}
         stroke="#212121"
-        opacity={0.7}
+        opacity={0.5}
         strokeWidth={1.6}
         strokeLinecap="round"
       />
@@ -24,7 +24,7 @@ function ReactionIconSvg(props) {
         d="M9.402 13.5a3 3 0 005.196 0"
         stroke="#212121"
         strokeWidth={1.8}
-        opacity={0.7}
+        opacity={0.5}
         strokeLinecap="round"
       />
       <Rect
@@ -35,7 +35,7 @@ function ReactionIconSvg(props) {
         rx={1.125}
         fill="#212121"
         stroke="black"
-        opacity={0.7}
+        opacity={0.5}
         strokeWidth={0}
         strokeLinecap="round"
       />
@@ -45,7 +45,7 @@ function ReactionIconSvg(props) {
         width={3.25}
         height={2.25}
         rx={1.125}
-        opacity={0.7}
+        opacity={0.5}
         fill="#212121"
         stroke="black"
         strokeWidth={0}

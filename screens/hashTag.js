@@ -5,6 +5,7 @@ import { View,Text,StyleSheet,StatusBar } from 'react-native';
 import config from '../config'
 import TimeLine from '../components/Timeline'
 import TagHeader from '../components/appbar/tagHeader'
+import FabCreate from '../components/fabCreate'
 
 
 export default class TagScreen extends React.Component {

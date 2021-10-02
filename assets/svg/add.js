@@ -14,8 +14,8 @@ function Add(props) {
     >
       <Path
         d="M22.5 11.25v22.5M33.75 22.5h-22.5"
-        stroke="#000"
-        opacity={.2}
+        stroke={props.color}
+        opacity={props.opacity}
         strokeWidth={3.5}
         strokeLinecap="round"
       />

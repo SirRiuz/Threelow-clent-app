@@ -8,6 +8,7 @@ import { AdMobBanner } from 'expo-ads-admob';
 export default class AdsBanner extends React.Component {
 
   render(){
+    return null
     return(
       <View style={styles.bannerContainer}>
         <AdMobBanner

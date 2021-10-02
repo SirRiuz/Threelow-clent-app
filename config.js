@@ -1,7 +1,7 @@
 
 
 const config = {
-    apiUrl:'https://shy-treefrog-52.loca.lt'
+    apiUrl:'https://stale-goat-80.loca.lt'
 }
 
 

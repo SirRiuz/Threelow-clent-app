@@ -38,6 +38,7 @@ export default class MyThreads extends React.Component{
             separator={true}
             navigation={this.props.navigation}
             ads={true}
+            isSave={false}
           />
         </View>
       )

@@ -35,6 +35,7 @@ export default class SaveThread extends React.Component{
         <View style={{ flex:1 }}>
           <SaveThreadBar navigation={this.props.navigation}/>
           <TimeLine
+            isSave={false}
             url={this.state.url}
             separator={true}
             navigation={this.props.navigation}

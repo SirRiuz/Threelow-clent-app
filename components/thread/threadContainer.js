@@ -15,16 +15,39 @@ export default class ThreadContainer extends React.Component {
       isVisible:false
     }
   }
+  
 
   render(){
     var separator = null
     var subThreads = null
     var modal = null
     var ads = null
+    var styleContainer = {
+      flexDirection:'row',
+      backgroundColor:'#fff',
+      borderRadius:5,
+      padding:20,
+      paddingRight:20,
+    }
+
+    if(this.props.isViewThread != undefined) {
+      if(this.props.isViewThread) {
+        styleContainer = {
+          flexDirection:'row',
+          backgroundColor:'#fff',
+          borderRadius:5,
+          paddingLeft:20,
+          paddingRight:20,
+          paddingTop:15,
+          paddingBottom:15,
+        }
+      }
+    }
 
 
     if(this.state.isVisible){
       modal = <ModalOptions
+        isSave={this.props.isSave}
         text={this.props.data.text} 
         size={this.props.data.subThreadsSize} 
         id={this.props.data.id} 
@@ -82,7 +105,7 @@ export default class ThreadContainer extends React.Component {
       >
         <View>
 
-          <View style={styles.container}>
+          <View style={styleContainer}>
             <ThreadIndicator size={this.props.data.subThreads.length}/>
 
             <View style={styles.threadItemContainer}>
@@ -113,12 +136,7 @@ const styles = StyleSheet.create({
   },
   threadItemContainer:{
     flex:1,
-  },
-  container:{
-    flexDirection:'row',
-    backgroundColor:'#fff',
-    borderRadius:5,
-    padding:20
+    
   }
 })
 

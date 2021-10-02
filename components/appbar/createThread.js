@@ -76,12 +76,16 @@ class AppBarCreateThread extends React.Component {
           this.onSaveThread(res.data.id)
           this.props.navigation.goBack()
         }
+        console.log(this.props.data)
+        console.log(data)
       })
 
       .catch(err => {
         console.error('Error en el request')
+        console.log(data)
         console.log(url)
         console.log(err)
+        console.log(this.props.data)
       })
       .catch(err => {
         console.error('Error al conextarse con sel servidor')
@@ -125,7 +129,7 @@ class AppBarCreateThread extends React.Component {
               //this.onCreateThreadTest()
             }}
           >
-            <Text style={{ color:'#fff',fontWeight:'bold' }}>Create</Text>
+            <Text style={{ color:'#fff',fontWeight:'bold' }}>Publicar</Text>
           </Pressable>
         </View>
 

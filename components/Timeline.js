@@ -118,10 +118,15 @@ class TimeLine extends React.Component {
       return <HeaderItem navigation={this.props.navigation} data={data}/>
     }
 
-
     return (
       <View style={{ flex:1 }}>
-        <ThreadContainer data={data} navigation={this.props.navigation} separator={this.props.separator}/>
+        <ThreadContainer
+         data={data}
+         navigation={this.props.navigation}
+         separator={this.props.separator}
+         isViewThread={this.props.isViewThread}
+         isSave={this.props.isSave}
+         />
       </View>
     )
   }

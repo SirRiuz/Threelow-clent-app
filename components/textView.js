@@ -55,8 +55,8 @@ export default TextView = (props) => {
 
 const styles = StyleSheet.create({
   tag:{
-    color:'#000',
-    fontWeight:'bold'
+    color:'black',
+    fontWeight:'bold',
   }
 })
 

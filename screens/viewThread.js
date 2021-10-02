@@ -50,6 +50,7 @@ export default class ViewThread extends React.Component {
         <TimeLine
           navigation={this.props.route.params.navigation}
           headerData={opThreadData}
+          isViewThread={true}
           threadOpData={(data) => {
             console.log('NEW DATA')
             console.log(data)

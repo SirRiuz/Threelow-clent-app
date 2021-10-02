@@ -13,7 +13,7 @@ class ReactionContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      reactions:[],
+      reactions:undefined,
       isClick:false,
       showReaction:false
     }
@@ -31,10 +31,10 @@ class ReactionContainer extends React.Component {
       .then(res => {})
 
       .catch(res => {
-        console.error('API SERVER ERROR')
+        console.log('API SERVER ERROR')
       })
       .catch(res =>{
-        console.error('COnect error')
+        console.log('COnect error')
       })
   }
 
@@ -49,7 +49,7 @@ class ReactionContainer extends React.Component {
       })
 
       .catch(err => {
-        console.error('Api errro')
+        console.log('Api errro')
       })
       .catch(err => {
         console.log('Server error')
@@ -125,7 +125,11 @@ class ReactionContainer extends React.Component {
 
   render(){
     var modal = null
-    var displayLoader = <ReactionIconSvg/>
+    var displayLoader = (
+      <View style={styles.reactionIconContainer}>
+        <ReactionIconSvg/>
+      </View>
+    )
     var content = <UIActivityIndicator color='#c2c2c2' />
   
     if(this.props.data.reactionsPreview != undefined){
@@ -139,20 +143,24 @@ class ReactionContainer extends React.Component {
       }
     }
 
-    
-    if(this.state.reactions.length > 0){
-      content = (
-        <FlatList
-          numColumns={3}
-          columnWrapperStyle={{ flex:1,justifyContent:'center' }}
-          style={{ flex:1,width:'100%',height:'100%' }}
-          data={this.state.reactions}
-          keyExtractor={(item, index) => index}
-          renderItem={this.renderItem}
-          showsVerticalScrollIndicator={false}
-        />
-      )
-    }
+
+
+    if(this.state.reactions != undefined) {
+      if(this.state.reactions.length > 0){
+        content = (
+          <FlatList
+            numColumns={3}
+            columnWrapperStyle={{ flex:1,justifyContent:'center' }}
+            style={{ flex:1,width:'100%',height:'100%' }}
+            data={this.state.reactions}
+            keyExtractor={(item, index) => index}
+            renderItem={this.renderItem}
+            showsVerticalScrollIndicator={false}
+          />
+        )
+      }
+    }    
+
 
     if (this.state.isVisible){
       modal = (
@@ -201,6 +209,14 @@ class ReactionContainer extends React.Component {
 
 
 const styles = StyleSheet.create({
+  reactionIconContainer:{
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'#F7F8FA',
+    width:35,
+    height:35,
+    borderRadius:10
+  },
   reactionItemContainer:{
     flexDirection:'row',
     alignItems:'center',

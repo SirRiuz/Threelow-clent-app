@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { StyleSheet,Image,Pressable } from "react-native";
+import { StyleSheet,Image,Pressable,Text } from "react-native";
 
 
 class ImagePreview extends React.Component {
@@ -17,7 +17,7 @@ class ImagePreview extends React.Component {
     if(this.props.blur){
       blur = 2.5
     }
-
+    
     return(
       <Pressable
         style={{ flex:1 }}

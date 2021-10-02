@@ -20,7 +20,9 @@ export default class TagHeader extends React.Component{
               this.props.navigation.goBack()
             }}
           >
-            <BackIcon color={'#000'}/>
+            <View style={styles.iconContainer}>
+              <BackIcon color={'#000'}/>
+            </View>
           </Pressable>
 
         </View>
@@ -36,6 +38,14 @@ export default class TagHeader extends React.Component{
 
 
 const styles = StyleSheet.create({
+  iconContainer:{
+    backgroundColor:'#F7F8FA',
+    width:33,
+    height:35,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:100
+  },
   tahNameStyle:{
     width:'100%',
     fontSize:15.5,
