@@ -61,9 +61,8 @@ export default class ThreadItem extends React.Component {
         {separator}
         <TextView style={{
           fontFamily:'Cerebri-Sans-Book',
-          fontSize:15.5,
           color:'rgba(33, 33, 33,0.89)',
-          fontSize:15.5,
+          fontSize:14.85,
           marginBottom:3.5,
         }} navigation={this.props.navigation}>{this.props.text}</TextView>
         {fileData}

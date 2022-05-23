@@ -1,11 +1,12 @@
 
 
 import React from 'react';
-import {View,StyleSheet,StatusBar } from 'react-native';
+import {View,StyleSheet,StatusBar ,Text} from 'react-native';
 import TimeLine from '../components/Timeline'
 import CollapsableAppBar from '../components/appbar/CollapsableAppBar'
 import AppBarThread from '../components/appbar/appBarThread'
 import BottomCreate from '../components/bottomCreate'
+import ThreadError from './errors/threadError';
 
 
 export default class ViewThread extends React.Component {
@@ -14,9 +15,9 @@ export default class ViewThread extends React.Component {
     super(props)
     this.state = {
       positionY:0,
+      error:false
     }
   }
-
 
   render(){
     var appBar = <AppBarThread navigation={this.props.route.params.navigation}/>
@@ -42,7 +43,15 @@ export default class ViewThread extends React.Component {
         navigation={this.props.route.params.navigation}
       />
     }
-  
+
+    if(this.state.error){
+      return(
+        <ThreadError
+          messege={'Lo sentimos, pero no pudimos cargar este hilo'}
+        />
+      )
+    }
+
     return(
       <View style={styles.container}>
         {statusBar}
@@ -51,9 +60,10 @@ export default class ViewThread extends React.Component {
           navigation={this.props.route.params.navigation}
           headerData={opThreadData}
           isViewThread={true}
+          onError={(err) => {
+            this.setState({ error:true })
+          }}
           threadOpData={(data) => {
-            console.log('NEW DATA')
-            console.log(data)
             this.setState({
               files:data.media_files,
               media_files_length:data.media_files.length

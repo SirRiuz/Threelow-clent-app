@@ -7,7 +7,7 @@ import { PacmanIndicator } from 'react-native-indicators'
 import { Dimensions } from 'react-native';
 import HeaderItem from '../components/itens/headerItem'
 import AdsBanner from '../components/adsBanner'
-
+import { getLocalToken } from '../auth'
 import ThreadContainer from '../components/thread/threadContainer'
 
 
@@ -19,6 +19,7 @@ class TimeLine extends React.Component {
       threads:[],
       next:false,
       dataProvider:new DataProvider((r1,r2) => r1 !== r2),
+      token:''
     }
 
 
@@ -32,8 +33,12 @@ class TimeLine extends React.Component {
   }
 
 
-  callApi(url) {
-    fetch(url)
+  callApi(url,token) {
+    fetch(url,{
+      headers:{
+        'token':token
+      }
+    })
       .then(res => {
         if(res.status == 500){
           alert('500 ERROR')
@@ -41,8 +46,12 @@ class TimeLine extends React.Component {
         return res.json()
       })
       .then(res => {
-        if(res.next == null){
-          
+        if(res.status == 'error'){
+          if(this.props.onError != undefined){
+            this.props.onError(res['type-error'])
+          }
+        }
+        if(res.next == null){  
           if(res.results.length == 0){
             this.setState({
               next:'end'
@@ -87,14 +96,22 @@ class TimeLine extends React.Component {
   onFetch() {
     if(this.state.next){
       if(this.state.next != 'end'){
-        this.callApi(this.state.next)
+        getLocalToken(token =>{
+          this.callApi(this.state.next,token)
+        })
       }
     } else {
-      this.callApi(this.props.url)
+      getLocalToken(token => {
+        this.callApi(this.props.url,token)
+      })
     }
   }
   
   componentDidMount(){
+    getLocalToken(token => {
+      this.setState({ token:token })
+    })
+
     if(this.props.headerData != undefined){
       this.setState({
        threads:[].concat(this.props.headerData),

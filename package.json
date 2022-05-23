@@ -20,6 +20,7 @@
     "expo": "~41.0.1",
     "expo-ads-admob": "~10.0.4",
     "expo-av": "~9.1.2",
+    "expo-font": "~9.1.0",
     "expo-image-picker": "~10.1.4",
     "expo-localization": "~10.1.0",
     "expo-status-bar": "~1.0.4",
@@ -41,7 +42,7 @@
     "react-native-web": "^0.17.1",
     "recyclerlistview": "^3.0.5",
     "translate-google-api": "^1.0.4",
-    "expo-font": "~9.1.0"
+    "yet": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

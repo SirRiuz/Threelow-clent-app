@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,StatusBar,AsyncStorage } from 'react-native';
 import CreateThreadScreen from './screens/createThread'
+import { PacmanIndicator } from 'react-native-indicators'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/home'
@@ -13,6 +14,9 @@ import SearchScreen from './screens/search'
 import SaveThread from './screens/saveThread'
 import MyThreads from './screens/myThreads'
 import ThreadInfo from './screens/threadInfo'
+import config from './config';
+import { getLocalToken,setLocalToken } from './auth'
+import encode from './encoder';
 
 
 function RootStackScreens(){
@@ -32,7 +36,7 @@ function RootStackScreens(){
 }
 
 
-class App extends React.Component {
+class MainApp extends React.Component {
   
   render(){
     const RootStack = createStackNavigator();
@@ -54,7 +58,67 @@ class App extends React.Component {
 }
 
 
+class App extends React.Component {
+
+
+  constructor(props){
+    super(props)
+    this.state = {
+      continue:false
+    }
+  }
+
+  componentDidMount(){
+    this.onAuthClient()
+  }
+
+
+
+  onAuthClient = () => {
+
+    var params = new FormData()
+    params.append('clientVersion',encode(config.version))
+    params.append('secretKey',encode(config.clientToken))
+
+    fetch(`${config.apiUrl}api/v1/auth/`,{
+      method:'POST',
+      body:params
+    })
+    
+      .then(res => res.json())
+      .then(res =>{
+        if(res.status == 'ok'){
+          //console.log('Generando nuevo token '+res.token)
+          setLocalToken(res.token)
+          this.setState({ continue:true })
+        }
+      })
+
+      .catch(err => {  })
+      .catch(err => {  })
+  }
+
+
+
+  render(){
+    if(this.state.continue){
+      return <MainApp/>
+    }
+    return(
+      <View style={styles.loader}>
+        <StatusBar barStyle={'light-content'} backgroundColor={'white'} />
+        <PacmanIndicator color='#d4d4d4'/>
+      </View>
+    )
+  }
+
+}
+
+
 const styles = StyleSheet.create({
+  loader:{
+    flex:1,
+  },
   container:{
     flex:1,
     justifyContent:'flex-end',

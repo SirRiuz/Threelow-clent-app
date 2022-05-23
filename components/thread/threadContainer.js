@@ -132,7 +132,7 @@ export default class ThreadContainer extends React.Component {
 const styles = StyleSheet.create({
   separator:{
     width:'100%',
-    height:25,
+    height:10,
   },
   threadItemContainer:{
     flex:1,

@@ -1,6 +1,6 @@
 
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet,View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import TimeLine from '../components/Timeline'
@@ -23,7 +23,7 @@ export default class FeedThrends extends React.Component {
         <AppBar title='Trends' navigation={this.props.navigation}/>        
         <View style={{ marginTop:80,flex:1 }}>
           <TimeLine
-            ads={true}
+            ads={false}
             separator={true}
             navigation={this.props.navigation}
             url={`${config.apiUrl}/api/v1/timeline/`}
@@ -35,8 +35,6 @@ export default class FeedThrends extends React.Component {
 }
 
 
-
-//F7F8FA
 const styles = StyleSheet.create({
   container:{
     flex:1,
